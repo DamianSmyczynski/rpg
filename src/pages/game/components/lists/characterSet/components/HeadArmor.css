@@ -1,0 +1,21 @@
+.helmet-low {
+    background-image: url("./../../../../../../assets/helmet-low.png");
+    background-size: cover;
+}
+
+.helmet-medium {
+    background-image: url('./../../../../../../assets/helmet-medium.png');
+    background-size: cover;
+}
+
+
+.helmet-high {
+    background-image: url('../../../../../../assets/helmet-high.png');
+    background-size: cover;
+}
+
+.no-helmet {
+    background-image: url("./../../../../../../assets/helmet-high.png");
+    background-size: cover;
+    filter: grayscale(1)
+}

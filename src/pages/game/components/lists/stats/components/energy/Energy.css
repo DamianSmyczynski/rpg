@@ -1,0 +1,10 @@
+.energy-bar {
+    width: 200px;
+    border: 2px solid black;
+    margin-left: 75px
+}
+
+.energy-bar-progress {
+    height: 15px;
+    background-color: rgb(224, 224, 0);
+}

@@ -1,0 +1,21 @@
+.hands-low {
+    background-image: url("./../../../../../../assets/hands-low.png");
+    background-size: cover;
+}
+
+.hands-medium {
+    background-image: url('./../../../../../../assets/hands-medium.png');
+    background-size: cover;
+}
+
+
+.hands-high {
+    background-image: url('../../../../../../assets/hands-high.png');
+    background-size: cover;
+}
+
+.no-hands {
+    background-image: url("./../../../../../../assets/hands-high.png");
+    background-size: cover;
+    filter: grayscale(1)
+}

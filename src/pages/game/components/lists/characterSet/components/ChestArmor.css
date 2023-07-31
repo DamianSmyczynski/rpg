@@ -1,0 +1,21 @@
+.chest-low {
+    background-image: url("./../../../../../../assets/chest-low.png");
+    background-size: cover;
+}
+
+.chest-medium {
+    background-image: url('./../../../../../../assets/chest-medium.png');
+    background-size: cover;
+}
+
+
+.chest-high {
+    background-image: url('../../../../../../assets/chest-high.png');
+    background-size: cover;
+}
+
+.no-chest {
+    background-image: url("./../../../../../../assets/chest-high.png");
+    background-size: cover;
+    filter: grayscale(1)
+}

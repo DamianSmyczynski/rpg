@@ -1,0 +1,23 @@
+.health-bar {
+    width: 200px;
+    border: 2px solid black;
+    margin-left: 75px
+}
+
+.health-bar-high,
+.health-bar-medium,
+.health-bar-low {
+    height: 15px;
+}
+
+.health-bar-high {
+    background-color: green;
+}
+
+.health-bar-medium {
+    background-color: orange;
+}
+
+.health-bar-low {
+    background-color: darkred;
+}

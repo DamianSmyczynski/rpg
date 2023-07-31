@@ -1,0 +1,21 @@
+.legs-low {
+    background-image: url("./../../../../../../assets/legs-low.png");
+    background-size: cover;
+}
+
+.legs-medium {
+    background-image: url('./../../../../../../assets/legs-medium.png');
+    background-size: cover;
+}
+
+
+.legs-high {
+    background-image: url('./../../../../../../assets/legs-high.png');
+    background-size: cover;
+}
+
+.no-legs {
+    background-image: url("./../../../../../../assets/legs-high.png");
+    background-size: cover;
+    filter: grayscale(1)
+}

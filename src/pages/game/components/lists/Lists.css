@@ -1,0 +1,26 @@
+.list {
+    position: relative;
+    text-align: center;
+    height: 710px;
+    width: 400px;
+    background-image: url("../../../../assets/game-background.png");
+    background-size: cover;
+    color: rgba(0, 0, 0, 0.7);
+    letter-spacing: 0.05em;
+    animation: render 2s forwards;
+}
+
+.stats {
+    float: left;
+}
+
+.inventory {
+    float: right;
+}
+
+.change-list-button {
+    position: absolute;
+    min-width: 130px;
+    bottom: 50px;
+    left: 137px;
+}

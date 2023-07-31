@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap');
+
+.background {
+    font-family: 'MedievalSharp', cursive;
+}
+
+input {
+    background-image: url("./assets/background.png");
+    background-position-x: center;
+    background-position-y: center;
+}
+
+@keyframes render {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}

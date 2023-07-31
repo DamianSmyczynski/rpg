@@ -1,0 +1,10 @@
+export const SET_NAME = "SET_NAME";
+export const SET_GENDER = "SET_GENDER";
+export const ADD_HEALTH = "ADD_HEALTH";
+export const SUBTRACT_HEALTH = "SUBTRACT_HEALTH";
+export const ADD_ENERGY = "ADD_ENERGY";
+export const SUBTRACT_ENERGY = "SUBTRACT_ENERGY";
+export const ADD_SKILL = "ADD_SKILL";
+export const SUBTRACT_SKILL = "SUBTRACT_SKILL";
+export const SET_ABILITY = "SET_ABILITY";
+export const RESET_SKILLS = "RESET_SKILLS";

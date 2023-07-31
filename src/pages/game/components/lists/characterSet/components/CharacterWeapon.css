@@ -1,0 +1,21 @@
+.weapon-low {
+    background-image: url("./../../../../../../assets/weapon-low.png");
+    background-size: cover;
+}
+
+.weapon-medium {
+    background-image: url('./../../../../../../assets/weapon-medium.png');
+    background-size: cover;
+}
+
+
+.weapon-high {
+    background-image: url('./../../../../../../assets/weapon-high.png');
+    background-size: cover;
+}
+
+.no-weapon {
+    background-image: url("./../../../../../../assets/weapon-high.png");
+    background-size: cover;
+    filter: grayscale(1)
+}

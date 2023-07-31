@@ -1,0 +1,30 @@
+h4 {
+    color: black;
+}
+
+.filters {
+    position: absolute;
+    animation: render 1s forwards;
+}
+
+.inventory-item,
+.items-filter {
+    background-color: #f8f5de;
+    background-image: linear-gradient(to right, rgba(255, 210, 0, 0.4), rgba(200, 160, 0, 0.1) 11%, rgba(0, 0, 0, 0) 35%, rgba(200, 160, 0, 0.1) 65%);
+    box-shadow: inset 0 0 12px rgba(255, 210, 0, 0.3), inset 0 0 5px rgba(255, 210, 0, 0.4), inset 0 0 7px rgba(220, 120, 0, 0.8);
+    color: rgba(0, 0, 0, 0.8);
+}
+
+.inventory-item {
+    height: 100px;
+}
+
+.inventory-item button {
+    height: 30px;
+    width: 100px;
+    float: right;
+}
+
+.items-filter {
+    cursor: pointer;
+}

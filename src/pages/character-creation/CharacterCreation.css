@@ -1,0 +1,27 @@
+.background {
+    height: 100%;
+    width: 100%;
+    text-align: center;
+}
+
+form {
+    display: inline-block;
+    border-radius: 2px;
+    text-align: center;
+    margin-top: 13%;
+    width: 710px;
+    height: 400px;
+    background-image: url("../../assets/background.png");
+    color: black;
+    background-size: cover;
+    resize: both;
+    letter-spacing: 0.05em;
+    line-height: 1.8;
+    animation: render 2s forwards;
+    padding: 1%;
+}
+
+.button-focused {
+    background-color: #dbd9c3;
+    transform: translateY(1px);
+}

@@ -1,0 +1,21 @@
+.boots-low {
+    background-image: url("./../../../../../../assets/boots-low.png");
+    background-size: cover;
+}
+
+.boots-medium {
+    background-image: url('./../../../../../../assets/boots-medium.png');
+    background-size: cover;
+}
+
+
+.boots-high {
+    background-image: url('../../../../../../assets/boots-high.png');
+    background-size: cover;
+}
+
+.no-boots {
+    background-image: url("./../../../../../../assets/boots-high.png");
+    background-size: cover;
+    filter: grayscale(1)
+}
