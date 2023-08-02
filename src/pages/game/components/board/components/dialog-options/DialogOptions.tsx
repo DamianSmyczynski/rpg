@@ -28,14 +28,6 @@ const mapDispatchToProps = (dispatch: any) => {
   };
 };
 
-// Trzeba to zrobić tak:
-
-// Lokacja >>> Szansa na jakiś scenariusz
-
-// Lokacja i scenariusz nie mają być "równoległe" - to dwie, nierówne sobie rzeczy. W danej lokacji może wystąpić dany scenariusz, bądź też
-// nie musi występować w ogóle. Kiedy bohater przemieści się w dane miejsce, wówczas gra ma sama zdecydować czy coś ma się wydarzyć lub nie.
-// Nie próbować "łączyć" lokacji i scenariusza na tym samym poziomie
-
 const DialogOptions = (props: any) => {
   const handleDialogOptions = (gameLocation: GameLocation) => {
     const actualGameLocation = GameLocationsList.get(gameLocation.name);
