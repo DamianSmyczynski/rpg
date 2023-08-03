@@ -50,7 +50,7 @@ const Inventory = (props: any) => {
 
   const handleFilters = (filters: TypeOfItem[]) => {
     return (
-      <div className="filters">
+      <div className="items-filter filters">
         {filters.map((filter, index) => (
           <div
             key={index}
@@ -74,16 +74,18 @@ const Inventory = (props: any) => {
 
     return filteredItems?.map((item: any, index: number) => (
       <div key={index} className="inventory-item">
-        <div>{item.name}</div>
+        <h5>{item.name}</h5>
         {item.type === TypeOfItem.Armor ? <p>Armor: {item.armor}</p> : null}
         {item.type === TypeOfItem.Weapon ? <p>Attack: {item.attack}</p> : null}
         <p>Durability: {item.durability}</p>
-        <button type="button" onClick={() => removeItem(item)}>
-          Remove
-        </button>
-        <button type="button" onClick={() => useItem(item)}>
-          Use
-        </button>
+        <div className="inventory-item-buttons">
+          <button type="button" onClick={() => removeItem(item)}>
+            Remove
+          </button>
+          <button type="button" onClick={() => useItem(item)}>
+            Use
+          </button>
+        </div>
       </div>
     ));
   };
@@ -127,7 +129,10 @@ const Inventory = (props: any) => {
   return (
     <>
       <h4>Inventory</h4>
-      <div className="items-filter" onClick={handleDropdown}>
+      <div
+        className={filterDropdown ? "items-filter" : "items-actual-filter"}
+        onClick={handleDropdown}
+      >
         {inventoryFilter}
         {filterDropdown ? handleFilters(filters) : null}
       </div>
