@@ -1,6 +1,7 @@
 import { Armor } from "../interfaces/items/Armor";
 import { TypeOfArmor } from "../interfaces/items/TypeOfArmor.enum";
 import { TypeOfItem } from "../interfaces/items/TypeOfItem.enum";
+import headIcon from "./../assets/head-icon.png";
 
 export const HeadArmorList: Map<string, Armor> = new Map([
   [
@@ -12,6 +13,7 @@ export const HeadArmorList: Map<string, Armor> = new Map([
       typeOfArmor: TypeOfArmor.Head,
       value: 5,
       durability: 100,
+      iconUrl: headIcon,
     } as Armor,
   ],
 ]);

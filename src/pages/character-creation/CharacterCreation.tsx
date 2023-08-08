@@ -12,7 +12,6 @@ import {
 } from "../../store/hero/heroActionCreators";
 
 const CharacterCreation = () => {
-  //stats states
   const [skillPoints, setSkillPoints] = useState(10);
   const [characterName, setCharacterName] = useState("");
   const [characterGender, setCharacterGender] = useState(GenderName.Male);

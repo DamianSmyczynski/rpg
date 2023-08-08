@@ -43,6 +43,7 @@ const Inventory = (props: any) => {
 
   const [inventoryFilter, setInventoryFilter] = useState(TypeOfItem.Other);
   const [filterDropdown, setFilterDropdown] = useState(false);
+  const [selectedItem, setSelectedItem] = useState({} as any);
 
   const handleDropdown = () => {
     setFilterDropdown(!filterDropdown);
@@ -72,22 +73,19 @@ const Inventory = (props: any) => {
       (item: Item | Armor | Weapon) => item.type === typeOfItem
     );
 
-    return filteredItems?.map((item: any, index: number) => (
-      <div key={index} className="inventory-item">
-        <h5>{item.name}</h5>
-        {item.type === TypeOfItem.Armor ? <p>Armor: {item.armor}</p> : null}
-        {item.type === TypeOfItem.Weapon ? <p>Attack: {item.attack}</p> : null}
-        <p>Durability: {item.durability}</p>
-        <div className="inventory-item-buttons">
-          <button type="button" onClick={() => removeItem(item)}>
-            Remove
+    return (
+      <div className="inventory-grid">
+        {filteredItems?.map((item: any, index: number) => (
+          <button
+            key={index}
+            className="item-icon"
+            onClick={() => setSelectedItem(item)}
+          >
+            <img src={item.iconUrl} />
           </button>
-          <button type="button" onClick={() => useItem(item)}>
-            Use
-          </button>
-        </div>
+        ))}
       </div>
-    ));
+    );
   };
 
   const useItem = (item: any) => {
@@ -97,6 +95,7 @@ const Inventory = (props: any) => {
           props.addItem(equipment.weapon);
         }
         props.setWeapon(item);
+        setSelectedItem({});
         props.removeItem(item);
         break;
       case TypeOfItem.Armor:
@@ -118,12 +117,14 @@ const Inventory = (props: any) => {
             break;
         }
         props.setArmor(item);
+        setSelectedItem({});
         props.removeItem(item);
     }
   };
 
   const removeItem = (item: Item) => {
     props.removeItem(item);
+    setSelectedItem({});
   };
 
   return (
@@ -135,6 +136,24 @@ const Inventory = (props: any) => {
       >
         {inventoryFilter}
         {filterDropdown ? handleFilters(filters) : null}
+      </div>
+      <div className="inventory-item">
+        <h5>{selectedItem.name ? selectedItem.name : "Choose item"}</h5>
+        {selectedItem.type === TypeOfItem.Armor ? (
+          <p>Armor: {selectedItem.armor}</p>
+        ) : null}
+        {selectedItem.type === TypeOfItem.Weapon ? (
+          <p>Attack: {selectedItem.attack}</p>
+        ) : null}
+        {selectedItem ? <p>Durability: {selectedItem.durability}</p> : null}
+        <div className="inventory-item-buttons">
+          <button type="button" onClick={() => useItem(selectedItem)}>
+            Use
+          </button>
+          <button type="button" onClick={() => removeItem(selectedItem)}>
+            Remove
+          </button>
+        </div>
       </div>
       {displayItems(inventoryFilter)}
     </>

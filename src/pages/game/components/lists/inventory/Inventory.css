@@ -15,26 +15,32 @@ h4 {
     color: rgba(0, 0, 0, 0.8);
 }
 
+.inventory-grid {
+    margin-top: 50px;
+    width: 250px;
+    display: inline-grid;
+    grid-template-columns: auto auto auto;
+    animation: render 1s forwards;
+}
+
 .inventory-item {
-    height: 130px;
-}
-
-.inventory-item h5 {
-    padding-top: 0.3rem;
-}
-
-.inventory-item p {
-    margin-bottom: 0rem;
+    height: 175px;
+    position: relative;
 }
 
 .inventory-item-buttons {
-    margin-right: 5px;
-    margin-top: 0.5rem;
+    display: inline-grid;
+    grid-template-columns: 100px 100px;
+    grid-gap: 105px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
 }
 
-.inventory-item button {
-    height: 30px;
-    width: 80px;
+.item-icon {
+    padding: 0%;
+    height: 85px;
+    width: 85px;
     float: right;
 }
 
@@ -47,12 +53,14 @@ h4 {
     margin-bottom: 4.5rem;
 }
 
-@keyframes items-filters-on {
-    from {
-        margin-top: 0rem;
-    }
+.weapon-icon {
+    background-image: url('./../../../../../assets/weapon-icon.png');
+}
 
-    to {
-        margin-top: 3rem;
-    }
+.chest-icon {
+    background-image: url('./../../../../../assets/armor-icon.png');
+}
+
+.other-icon {
+    background-image: url('./../../../../../assets/other-icon.png');
 }
