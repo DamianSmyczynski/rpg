@@ -41,9 +41,12 @@ const Inventory = (props: any) => {
   const inventoryItems = props.inventoryItems;
   const equipment = props.characterEquipment;
 
-  const [inventoryFilter, setInventoryFilter] = useState(TypeOfItem.Other);
+  const [inventoryFilter, setInventoryFilter] = useState(TypeOfItem.None);
   const [filterDropdown, setFilterDropdown] = useState(false);
+  const [listOfFilteredItems, setListOfFilteredItems] = useState([]);
   const [selectedItem, setSelectedItem] = useState({} as any);
+  const [firstIndexItem, setFirstIndexItem] = useState(0);
+  const [lastIndexItem, setLastIndexItem] = useState(6);
 
   const handleDropdown = () => {
     setFilterDropdown(!filterDropdown);
@@ -59,6 +62,7 @@ const Inventory = (props: any) => {
             onClick={() => {
               setInventoryFilter(filter);
               setFilterDropdown(false);
+              handleListFiltering(filter);
             }}
           >
             {filter}
@@ -68,6 +72,28 @@ const Inventory = (props: any) => {
     );
   };
 
+  const handleListFiltering = (filter: TypeOfItem) => {
+    setListOfFilteredItems(
+      inventoryItems?.filter(
+        (item: Item | Armor | Weapon) => item.type === filter
+      )
+    );
+  };
+
+  const handleArrowLeft = () => {
+    if (lastIndexItem > 6) {
+      setFirstIndexItem(firstIndexItem - 6);
+      setLastIndexItem(lastIndexItem - 6);
+    }
+  };
+
+  const handleArrowRight = () => {
+    if (listOfFilteredItems.length > lastIndexItem) {
+      setFirstIndexItem(firstIndexItem + 6);
+      setLastIndexItem(lastIndexItem + 6);
+    }
+  };
+
   const displayItems = (typeOfItem: TypeOfItem) => {
     const filteredItems = inventoryItems?.filter(
       (item: Item | Armor | Weapon) => item.type === typeOfItem
@@ -75,15 +101,19 @@ const Inventory = (props: any) => {
 
     return (
       <div className="inventory-grid">
-        {filteredItems?.map((item: any, index: number) => (
-          <button
-            key={index}
-            className="item-icon"
-            onClick={() => setSelectedItem(item)}
-          >
-            <img src={item.iconUrl} />
-          </button>
-        ))}
+        {filteredItems?.map((item: any, index: number) => {
+          if (index >= firstIndexItem && index < lastIndexItem) {
+            return (
+              <button
+                key={index}
+                className="item-icon"
+                onClick={() => setSelectedItem(item)}
+              >
+                <img src={item.iconUrl} />
+              </button>
+            );
+          }
+        })}
       </div>
     );
   };
@@ -156,6 +186,10 @@ const Inventory = (props: any) => {
         </div>
       </div>
       {displayItems(inventoryFilter)}
+      <div className="page-arrows">
+        <button onClick={() => handleArrowLeft()}>&lt;</button>
+        <button onClick={() => handleArrowRight()}>&gt;</button>
+      </div>
     </>
   );
 };

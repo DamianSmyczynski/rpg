@@ -14,8 +14,9 @@ const itemsReducer = (
       };
 
     case actionTypes.REMOVE_ITEM:
+      const itemIndex = state.inventoryItems.indexOf(action.item);
       const newItems = state.inventoryItems.filter(
-        (item) => item.name !== action.item.name
+        (item, index) => index !== itemIndex
       );
       return { ...state, inventoryItems: newItems };
 
