@@ -73,11 +73,13 @@ const Inventory = (props: any) => {
   };
 
   const handleListFiltering = (filter: TypeOfItem) => {
+    console.log(listOfFilteredItems);
     setListOfFilteredItems(
       inventoryItems?.filter(
         (item: Item | Armor | Weapon) => item.type === filter
       )
     );
+    console.log(listOfFilteredItems);
   };
 
   const handleArrowLeft = () => {
@@ -88,7 +90,7 @@ const Inventory = (props: any) => {
   };
 
   const handleArrowRight = () => {
-    if (listOfFilteredItems.length > lastIndexItem) {
+    if (listOfFilteredItems.length - 1 > lastIndexItem) {
       setFirstIndexItem(firstIndexItem + 6);
       setLastIndexItem(lastIndexItem + 6);
     }
@@ -126,7 +128,7 @@ const Inventory = (props: any) => {
         }
         props.setWeapon(item);
         setSelectedItem({});
-        props.removeItem(item);
+        removeItem(item);
         break;
       case TypeOfItem.Armor:
         switch (item.typeOfArmor) {
@@ -148,13 +150,18 @@ const Inventory = (props: any) => {
         }
         props.setArmor(item);
         setSelectedItem({});
-        props.removeItem(item);
+        removeItem(item);
     }
   };
 
   const removeItem = (item: Item) => {
     props.removeItem(item);
     setSelectedItem({});
+    handleListFiltering(inventoryFilter);
+    console.log(listOfFilteredItems.length - 1, lastIndexItem - 6);
+    if (listOfFilteredItems.length - 2 === lastIndexItem - 6) {
+      handleArrowLeft();
+    }
   };
 
   return (
