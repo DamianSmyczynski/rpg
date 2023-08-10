@@ -73,13 +73,13 @@ const Inventory = (props: any) => {
   };
 
   const handleListFiltering = (filter: TypeOfItem) => {
-    console.log(listOfFilteredItems);
     setListOfFilteredItems(
       inventoryItems?.filter(
         (item: Item | Armor | Weapon) => item.type === filter
       )
     );
-    console.log(listOfFilteredItems);
+    setFirstIndexItem(0);
+    setLastIndexItem(6);
   };
 
   const handleArrowLeft = () => {
@@ -158,7 +158,6 @@ const Inventory = (props: any) => {
     props.removeItem(item);
     setSelectedItem({});
     handleListFiltering(inventoryFilter);
-    console.log(listOfFilteredItems.length - 1, lastIndexItem - 6);
     if (listOfFilteredItems.length - 2 === lastIndexItem - 6) {
       handleArrowLeft();
     }
