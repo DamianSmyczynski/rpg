@@ -82,6 +82,14 @@ const Inventory = (props: any) => {
     setLastIndexItem(6);
   };
 
+  const updateItemsInActualList = (filter: TypeOfItem) => {
+    setListOfFilteredItems(
+      inventoryItems?.filter(
+        (item: Item | Armor | Weapon) => item.type === filter
+      )
+    );
+  };
+
   const handleArrowLeft = () => {
     if (lastIndexItem > 6) {
       setFirstIndexItem(firstIndexItem - 6);
@@ -157,7 +165,7 @@ const Inventory = (props: any) => {
   const removeItem = (item: Item) => {
     props.removeItem(item);
     setSelectedItem({});
-    handleListFiltering(inventoryFilter);
+    updateItemsInActualList(inventoryFilter);
     if (listOfFilteredItems.length - 2 === lastIndexItem - 6) {
       handleArrowLeft();
     }
@@ -181,7 +189,9 @@ const Inventory = (props: any) => {
         {selectedItem.type === TypeOfItem.Weapon ? (
           <p>Attack: {selectedItem.attack}</p>
         ) : null}
-        {selectedItem ? <p>Durability: {selectedItem.durability}</p> : null}
+        {selectedItem.durability ? (
+          <p>Durability: {selectedItem.durability}</p>
+        ) : null}
         <div className="inventory-item-buttons">
           <button type="button" onClick={() => useItem(selectedItem)}>
             Use

@@ -29,6 +29,7 @@ const Lists = () => {
             : ListName.Stats}
         </button>
       </div>
+      <div className="list">Test</div>
       <div className="list inventory p-5">
         <Inventory />
       </div>
