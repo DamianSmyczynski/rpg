@@ -7,7 +7,7 @@ import { Weapon } from "../../../../../interfaces/items/Weapon";
 import {
   addItem,
   removeItem,
-} from "../../../../../store/items/itemsAcitonCreators";
+} from "../../../../../store/items/itemsActionCreators";
 import { TypeOfItem } from "../../../../../interfaces/items/TypeOfItem.enum";
 import {
   setArmor,
@@ -189,7 +189,9 @@ const Inventory = (props: any) => {
         {selectedItem.type === TypeOfItem.Weapon ? (
           <p>Attack: {selectedItem.attack}</p>
         ) : null}
-        {selectedItem.durability ? (
+        {selectedItem.durability ||
+        selectedItem.type === TypeOfItem.Armor ||
+        selectedItem.type === TypeOfItem.Weapon ? (
           <p>Durability: {selectedItem.durability}</p>
         ) : null}
         <div className="inventory-item-buttons">

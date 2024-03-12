@@ -20,6 +20,15 @@ const itemsReducer = (
       );
       return { ...state, inventoryItems: newItems };
 
+    case actionTypes.UPDATE_INVENTORY:
+      if (action.items) {
+        return {
+          ...state,
+          inventoryItems: action.items,
+        };
+      }
+      return { ...state };
+
     default:
       return state;
   }

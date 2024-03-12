@@ -1,0 +1,29 @@
+.trade-boards {
+    display: flex;
+}
+
+.trade-inventory-grid {
+    margin-top: 25px;
+    height: 30%;
+    width: 40%;
+    display: inline-grid;
+    grid-template-columns: auto auto auto;
+    animation: render 1s forwards;
+}
+
+.trade-item-icon {
+    padding: 0%;
+    width: 85px;
+    height: 85px;
+}
+
+.trade-arrows {
+    margin-top: 14vh;
+    grid-template-columns: auto auto;
+    justify-content: space-between;
+    grid-gap: 205px;
+}
+
+.trade-selected-item {
+    min-height: 252px;
+}

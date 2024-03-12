@@ -1,5 +1,4 @@
 .list {
-    position: relative;
     text-align: center;
     height: 75.75vh;
     width: 20.85vw;
@@ -10,17 +9,9 @@
     animation: render 2s forwards;
     min-width: 340px;
     min-height: 700px;
-}
-
-.stats {
-    float: left;
-}
-
-.inventory {
-    float: right;
+    justify-content: space-between;
 }
 
 .change-list-button {
-
     min-width: 1vw;
 }

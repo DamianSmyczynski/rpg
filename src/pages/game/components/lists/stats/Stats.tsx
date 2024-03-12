@@ -1,21 +1,34 @@
+import { connect } from "react-redux";
 import { Ability } from "../../../../../interfaces/Ability";
-import { Skill } from "../../../../../interfaces/Skill";
-import { store } from "../../../../../store/store";
 import AbilityStat from "./components/ability/AbilityStat";
 import Energy from "./components/energy/Energy";
 import Gender from "./components/gender/Gender";
 import Health from "./components/health/Health";
 import Name from "./components/name/Name";
-import SkillStat from "./components/skill/SkillStat";
 import "./Stats.css";
+import { Skill } from "../../../../../interfaces/Skill";
 
-const SkillsHandler = (skills: Skill[]) => {
-  return skills.map((skill, index) => (
-    <div key={index} className="skills">
-      <SkillStat key={skill.name} name={skill.name} />
-      <br />
-    </div>
-  ));
+const mapStateToProps = (state: any) => {
+  return {
+    health: state.hero.health,
+    energy: state.hero.energy,
+    skills: state.hero.skills,
+    abilites: state.hero.abilities,
+  };
+};
+
+const displaySkills = (skills: Skill[]) => {
+  return (
+    <>
+      {skills.map((skill) => {
+        return (
+          <p key={skill.name}>
+            {skill.name}: {skill.value}
+          </p>
+        );
+      })}
+    </>
+  );
 };
 
 const AbilitiesHandler = (abilities: Ability[]) => {
@@ -27,8 +40,12 @@ const AbilitiesHandler = (abilities: Ability[]) => {
   ));
 };
 
-const Stats = () => {
-  const { skills, abilities } = store.getState().hero;
+const Stats = (props: any) => {
+  const health = props.health;
+  const energy = props.energy;
+  const skills = props.skills;
+  const abilities = props.abilites;
+
   return (
     <div className="active-list">
       <div className="p-2">
@@ -41,17 +58,17 @@ const Stats = () => {
         <Gender key="gender" />
       </div>
       <div className="pb-2">
-        <Health key="health" />
+        <Health health={health} />
       </div>
       <div className="pb-2">
-        <Energy key="energy" />
+        <Energy energy={energy} />
       </div>
       <h5>Skills</h5>
-      {SkillsHandler(skills)}
+      {displaySkills(skills)}
       <h5>Abilities</h5>
       {AbilitiesHandler(abilities)}
     </div>
   );
 };
 
-export default Stats;
+export default connect(mapStateToProps)(Stats);

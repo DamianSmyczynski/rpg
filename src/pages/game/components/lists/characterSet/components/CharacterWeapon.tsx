@@ -53,7 +53,7 @@ const CharacterWeapon = (props: any) => {
         <div className="item-details">
           <p>Weapon</p>
           <p>{weapon.name}</p>
-          <p>Weapon: {weapon.Weapon}</p>
+          <p>Damage: {weapon.attack}</p>
         </div>
       ) : null}
     </>

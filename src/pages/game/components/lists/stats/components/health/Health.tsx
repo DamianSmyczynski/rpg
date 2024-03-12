@@ -1,11 +1,4 @@
-import { connect } from "react-redux";
 import "./Health.css";
-
-const mapStateToProps = (state: any) => {
-  return {
-    health: state.hero.health,
-  };
-};
 
 const HealthBarClass = (health: number) => {
   if (health > 75) {
@@ -31,4 +24,4 @@ const Health = (props: any) => {
   );
 };
 
-export default connect(mapStateToProps)(Health);
+export default Health;

@@ -25,3 +25,14 @@ export function removeItem(item: Item | Armor | Weapon) {
     dispatch(action);
   };
 }
+
+export function updateInventory(items: (Item | Armor | Weapon)[]) {
+  const action: ItemsAction = {
+    type: actionTypes.UPDATE_INVENTORY,
+    items: items,
+  };
+
+  return (dispatch: itemsDispatchType) => {
+    dispatch(action);
+  };
+}

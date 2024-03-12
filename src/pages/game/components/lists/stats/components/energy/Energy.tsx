@@ -1,11 +1,4 @@
-import { connect } from "react-redux";
 import "./Energy.css";
-
-const mapStateToProps = (state: any) => {
-  return {
-    energy: state.hero.energy,
-  };
-};
 
 const Energy = (props: any) => {
   return (
@@ -21,4 +14,4 @@ const Energy = (props: any) => {
   );
 };
 
-export default connect(mapStateToProps)(Energy);
+export default Energy;

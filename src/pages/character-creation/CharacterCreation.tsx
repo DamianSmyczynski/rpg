@@ -1,43 +1,191 @@
 import "./CharacterCreation.css";
 import { useState } from "react";
 import { GenderName } from "../../enums/gender.enum";
-import SkillSetup from "./components/SkillSetup";
 import { SkillName } from "../../enums/skills.enum";
 import { useNavigate } from "react-router-dom";
-import { store } from "../../store/store";
 import {
+  addSkill,
+  reduceSkill,
   resetSkills,
   setGender,
   setName,
 } from "../../store/hero/heroActionCreators";
+import { connect } from "react-redux";
 
-const CharacterCreation = () => {
+const mapStateToProps = (state: any) => {
+  return {
+    name: state.hero.name,
+    gender: state.hero.gender,
+    skills: state.hero.skills,
+  };
+};
+
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    setName: (characterName: string) => dispatch(setName(characterName)),
+    setGender: (characterGender: GenderName) =>
+      dispatch(setGender(characterGender)),
+    addSkill: (skillName: SkillName) => dispatch(addSkill(skillName)),
+    reduceSkill: (skillName: SkillName) => dispatch(reduceSkill(skillName)),
+    resetSkills: () => dispatch(resetSkills()),
+  };
+};
+
+const CharacterCreation = (props: any) => {
   const [skillPoints, setSkillPoints] = useState(10);
   const [characterName, setCharacterName] = useState("");
   const [characterGender, setCharacterGender] = useState(GenderName.Male);
 
+  const [characterStrength, setCharacterStrength] = useState(1);
+  const [characterAgility, setCharacterAgility] = useState(1);
+  const [characterIntellect, setCharacterIntellect] = useState(1);
+
   const navigate = useNavigate();
 
-  const addSkillPoint = () => {
-    if (skillPoints > 0) {
-      setSkillPoints(skillPoints - 1);
+  const displaySkills = () => {
+    return (
+      <>
+        <h4>Available skill points: {skillPoints}</h4>
+        <h5>Skills</h5>
+        <div className="container text-center">
+          <div className="row">
+            <div className="col">
+              <button
+                type="button"
+                onClick={() => handleReduceSkill(SkillName.Strength)}
+              >
+                -
+              </button>
+            </div>
+            <div className="col">
+              {SkillName.Strength}: {characterStrength}
+            </div>
+            <div className="col">
+              <button
+                type="button"
+                onClick={() => handleAddSkill(SkillName.Strength)}
+              >
+                +
+              </button>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col">
+              <button
+                type="button"
+                onClick={() => handleReduceSkill(SkillName.Agility)}
+              >
+                -
+              </button>
+            </div>
+            <div className="col">
+              {SkillName.Agility}: {characterAgility}
+            </div>
+            <div className="col">
+              <button
+                type="button"
+                onClick={() => handleAddSkill(SkillName.Agility)}
+              >
+                +
+              </button>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col">
+              <button
+                type="button"
+                onClick={() => handleReduceSkill(SkillName.Intellect)}
+              >
+                -
+              </button>
+            </div>
+            <div className="col">
+              {SkillName.Intellect}: {characterIntellect}
+            </div>
+            <div className="col">
+              <button
+                type="button"
+                onClick={() => handleAddSkill(SkillName.Intellect)}
+              >
+                +
+              </button>
+            </div>
+          </div>
+        </div>
+      </>
+    );
+  };
+
+  const handleReduceSkill = (skill: SkillName) => {
+    switch (skill) {
+      case SkillName.Strength:
+        if (characterStrength) {
+          props.reduceSkill(skill);
+          setCharacterStrength((prev) => prev - 1);
+          setSkillPoints((prev) => prev + 1);
+        }
+        break;
+
+      case SkillName.Agility:
+        if (characterAgility) {
+          props.reduceSkill(skill);
+          setCharacterAgility((prev) => prev - 1);
+          setSkillPoints((prev) => prev + 1);
+        }
+        break;
+
+      case SkillName.Intellect:
+        if (characterIntellect) {
+          props.reduceSkill(skill);
+          setCharacterIntellect((prev) => prev - 1);
+          setSkillPoints((prev) => prev + 1);
+        }
+        break;
+
+      default:
+        return;
     }
   };
 
-  const removeSkillPoint = () => {
-    setSkillPoints(skillPoints + 1);
+  const handleAddSkill = (skill: SkillName) => {
+    if (skillPoints) {
+      props.addSkill(skill);
+      switch (skill) {
+        case SkillName.Strength: {
+          setCharacterStrength((prev) => prev + 1);
+          setSkillPoints((prev) => prev - 1);
+          break;
+        }
+        case SkillName.Agility: {
+          setCharacterAgility((prev) => prev + 1);
+          setSkillPoints((prev) => prev - 1);
+          break;
+        }
+        case SkillName.Intellect: {
+          setCharacterIntellect((prev) => prev + 1);
+          setSkillPoints((prev) => prev - 1);
+          break;
+        }
+        default:
+          return;
+      }
+    }
   };
 
-  const reset = () => {
+  const handleReset = () => {
     setCharacterName("");
     setCharacterGender(GenderName.Male);
+
     setSkillPoints(10);
-    store.dispatch(resetSkills());
+    setCharacterStrength(1);
+    setCharacterAgility(1);
+    setCharacterIntellect(1);
+    props.resetSkills();
   };
 
   const handleSubmit = () => {
-    store.dispatch(setName(characterName));
-    store.dispatch(setGender(characterGender));
+    props.setName(characterName);
+    props.setGender(characterGender);
 
     navigate("/game");
   };
@@ -48,7 +196,8 @@ const CharacterCreation = () => {
         <h1>Character Creation</h1>
         <div className="name m-2">
           <label>
-            Name:
+            Name
+            <br />
             <input
               type="text"
               value={characterName}
@@ -91,29 +240,9 @@ const CharacterCreation = () => {
             </div>
           </div>
         </div>
-
-        <h4>Available skill points: {skillPoints}</h4>
-        <h5>Skills</h5>
-        <SkillSetup
-          name={SkillName.Strength}
-          allSkillPoints={skillPoints}
-          addSkillPoint={addSkillPoint}
-          removeSkillPoint={removeSkillPoint}
-        ></SkillSetup>
-        <SkillSetup
-          name={SkillName.Agility}
-          allSkillPoints={skillPoints}
-          addSkillPoint={addSkillPoint}
-          removeSkillPoint={removeSkillPoint}
-        ></SkillSetup>
-        <SkillSetup
-          name={SkillName.Intellect}
-          allSkillPoints={skillPoints}
-          addSkillPoint={addSkillPoint}
-          removeSkillPoint={removeSkillPoint}
-        ></SkillSetup>
+        {displaySkills()}
         <div className="m-1">
-          <button type="button" onClick={reset}>
+          <button type="button" onClick={handleReset}>
             Reset
           </button>
           <button type="submit" onSubmit={handleSubmit}>
@@ -125,4 +254,4 @@ const CharacterCreation = () => {
   );
 };
 
-export default CharacterCreation;
+export default connect(mapStateToProps, mapDispatchToProps)(CharacterCreation);

@@ -5,6 +5,16 @@ import { Weapon } from "../../interfaces/items/Weapon";
 import { TypeOfArmor } from "../../interfaces/items/TypeOfArmor.enum";
 import { Armor } from "../../interfaces/items/Armor";
 
+const newDurability = (
+  actualDurability: number,
+  amountOfReducedDurability: number
+) => {
+  if (actualDurability - amountOfReducedDurability < 0) {
+    return 0;
+  }
+  return actualDurability - amountOfReducedDurability;
+};
+
 const characterEquipmentReducer = (
   state: CharacterEquipmentState = initialCharacterEquipment,
   action: CharacterEquipmentAction
@@ -12,36 +22,36 @@ const characterEquipmentReducer = (
   switch (action.type) {
     //setting weapon
     case actionTypes.SET_WEAPON:
-      if (action.weapon) return { ...state, weapon: action.weapon };
+      if (action.item) return { ...state, weapon: action.item };
       return state;
 
     //removing weapon
     case actionTypes.REMOVE_WEAPON:
-      if (action.weapon) return { ...state, weapon: {} as Weapon };
+      if (action.item) return { ...state, weapon: {} as Weapon };
       return state;
 
     //setting armor
     case actionTypes.SET_ARMOR:
-      if (action.armor) {
-        switch (action.armor.typeOfArmor) {
+      if (action.item) {
+        switch (action.item.typeOfArmor) {
           case TypeOfArmor.Head:
-            return { ...state, head: action.armor };
+            return { ...state, head: action.item };
           case TypeOfArmor.Chest:
-            return { ...state, chest: action.armor };
+            return { ...state, chest: action.item };
           case TypeOfArmor.Hands:
-            return { ...state, hands: action.armor };
+            return { ...state, hands: action.item };
           case TypeOfArmor.Legs:
-            return { ...state, legs: action.armor };
+            return { ...state, legs: action.item };
           case TypeOfArmor.Boots:
-            return { ...state, boots: action.armor };
+            return { ...state, boots: action.item };
         }
       }
       return state;
 
     //removing armor
     case actionTypes.REMOVE_ARMOR:
-      if (action.armor) {
-        switch (action.armor.typeOfArmor) {
+      if (action.item) {
+        switch (action.item.typeOfArmor) {
           case TypeOfArmor.Head:
             return { ...state, head: {} as Armor };
           case TypeOfArmor.Chest:
@@ -52,6 +62,102 @@ const characterEquipmentReducer = (
             return { ...state, legs: {} as Armor };
           case TypeOfArmor.Boots:
             return { ...state, boots: {} as Armor };
+        }
+      }
+      return state;
+
+    //adding durability
+    case actionTypes.ADD_ARMOR_DURABILITY:
+      if (action.item) {
+        switch (action.item.typeOfArmor) {
+          case TypeOfArmor.Head:
+            return {
+              ...state,
+              head: { ...state.head, durability: 100 } as Armor,
+            };
+          case TypeOfArmor.Chest:
+            return {
+              ...state,
+              chest: { ...state.chest, durability: 100 } as Armor,
+            };
+          case TypeOfArmor.Hands:
+            return {
+              ...state,
+              hands: { ...state.hands, durability: 100 } as Armor,
+            };
+          case TypeOfArmor.Legs:
+            return {
+              ...state,
+              legs: { ...state.legs, durability: 100 } as Armor,
+            };
+          case TypeOfArmor.Boots:
+            return {
+              ...state,
+              boots: { ...state.boots, durability: 100 } as Armor,
+            };
+        }
+      }
+      return state;
+
+    //reducing durability
+    case actionTypes.REDUCE_ARMOR_DURABILITY:
+      if (action.item) {
+        switch (action.item.typeOfArmor) {
+          case TypeOfArmor.Head:
+            return {
+              ...state,
+              head: {
+                ...state.head,
+                durability: newDurability(
+                  state.head?.durability!,
+                  action.durability!
+                ),
+              } as Armor,
+            };
+          case TypeOfArmor.Chest:
+            return {
+              ...state,
+              chest: {
+                ...state.chest,
+                durability: newDurability(
+                  state.chest?.durability!,
+                  action.durability!
+                ),
+              } as Armor,
+            };
+          case TypeOfArmor.Hands:
+            return {
+              ...state,
+              hands: {
+                ...state.hands,
+                durability: newDurability(
+                  state.hands?.durability!,
+                  action.durability!
+                ),
+              } as Armor,
+            };
+          case TypeOfArmor.Legs:
+            return {
+              ...state,
+              legs: {
+                ...state.legs,
+                durability: newDurability(
+                  state.legs?.durability!,
+                  action.durability!
+                ),
+              } as Armor,
+            };
+          case TypeOfArmor.Boots:
+            return {
+              ...state,
+              boots: {
+                ...state.boots,
+                durability: newDurability(
+                  state.boots?.durability!,
+                  action.durability!
+                ),
+              } as Armor,
+            };
         }
       }
       return state;

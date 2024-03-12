@@ -4,6 +4,7 @@ import { BootsArmorList } from "../../itemsLists/bootsArmorList";
 import { ChestArmorList } from "../../itemsLists/chestArmorList";
 import { HeadArmorList } from "../../itemsLists/headArmorList";
 import { LegsArmorList } from "../../itemsLists/legsArmorList";
+import { WeaponList } from "../../itemsLists/weaponList";
 import { CharacterEquipmentState } from "../../type";
 
 export const initialCharacterEquipment: CharacterEquipmentState = {
@@ -12,5 +13,5 @@ export const initialCharacterEquipment: CharacterEquipmentState = {
   hands: {} as Armor,
   legs: LegsArmorList.get("Cloth Pants") as Armor,
   boots: BootsArmorList.get("Footwraps") as Armor,
-  weapon: {} as Weapon,
+  weapon: WeaponList.get("Rusty Sword") as Weapon,
 };

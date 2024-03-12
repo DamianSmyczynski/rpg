@@ -1,4 +1,5 @@
 import { GenderName } from "../../enums/gender.enum";
+import { SkillName } from "../../enums/skills.enum";
 import { HeroAction, heroDispatchType } from "../../type";
 import * as actionTypes from "./heroActionTypes";
 
@@ -35,9 +36,9 @@ export function addHealth(health: number) {
   };
 }
 
-export function subtractHealth(health: number) {
+export function reduceHealth(health: number) {
   const action: HeroAction = {
-    type: actionTypes.SUBTRACT_HEALTH,
+    type: actionTypes.REDUCE_HEALTH,
     value: health,
   };
 
@@ -57,9 +58,9 @@ export function addEnergy(energy: number) {
   };
 }
 
-export function subtractEnergy(energy: number) {
+export function reduceEnergy(energy: number) {
   const action: HeroAction = {
-    type: actionTypes.SUBTRACT_ENERGY,
+    type: actionTypes.REDUCE_ENERGY,
     value: energy,
   };
 
@@ -68,10 +69,10 @@ export function subtractEnergy(energy: number) {
   };
 }
 
-export function addSkill(name: string) {
+export function addSkill(skillName: SkillName) {
   const action: HeroAction = {
     type: actionTypes.ADD_SKILL,
-    name: name,
+    skillName: skillName,
   };
 
   return (dispatch: heroDispatchType) => {
@@ -79,10 +80,10 @@ export function addSkill(name: string) {
   };
 }
 
-export function subtractSkill(name: string) {
+export function reduceSkill(skillName: SkillName) {
   const action: HeroAction = {
-    type: actionTypes.SUBTRACT_SKILL,
-    name: name,
+    type: actionTypes.REDUCE_SKILL,
+    skillName: skillName,
   };
 
   return (dispatch: heroDispatchType) => {

@@ -1,6 +1,0 @@
-.lists {
-    width: 100%;
-    display: inline-grid;
-    grid-template-columns: auto auto auto;
-    justify-content: space-between;
-}

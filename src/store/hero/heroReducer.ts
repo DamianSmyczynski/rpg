@@ -2,6 +2,8 @@ import { Ability } from "../../interfaces/Ability";
 import { HeroState, HeroAction } from "../../type";
 import { initialHeroState } from "./initialHeroState";
 import * as actionTypes from "./heroActionTypes";
+import { SkillName } from "../../enums/skills.enum";
+import update from "immutability-helper";
 
 const heroReducer = (
   state: HeroState = initialHeroState,
@@ -25,7 +27,7 @@ const heroReducer = (
       return state;
 
     //reducing health
-    case actionTypes.SUBTRACT_HEALTH:
+    case actionTypes.REDUCE_HEALTH:
       if (action.value)
         return { ...state, health: state.health - action.value };
       return state;
@@ -37,58 +39,44 @@ const heroReducer = (
       return state;
 
     //reducing health
-    case actionTypes.SUBTRACT_ENERGY:
+    case actionTypes.REDUCE_ENERGY:
       if (action.value)
         return { ...state, energy: state.energy - action.value };
       return state;
 
     //increasing skill
     case actionTypes.ADD_SKILL:
-      if (action.name) {
-        const addSkill = state.skills.find((skill) => {
-          return skill.name === action.name;
-        });
-        if (addSkill) addSkill.value += 1;
-        const skills = state.skills;
-        skills.map((skill) => {
-          if (skill.name === addSkill?.name) {
-            skill.value = addSkill.value;
-          }
-        });
+      if (action.skillName) {
         return {
           ...state,
-          skills: skills,
+          skills: state.skills.map((skill) =>
+            skill.name === action.skillName
+              ? { ...skill, value: skill.value + 1 }
+              : skill
+          ),
         };
       }
       return state;
 
     //reducing skill
-    case actionTypes.SUBTRACT_SKILL:
-      if (action.name) {
-        const subtractSkill = state.skills.find((skill) => {
-          return skill.name === action.name;
-        });
-        if (subtractSkill) subtractSkill.value -= 1;
-        const skills = state.skills;
-        skills.map((skill) => {
-          if (skill.name === subtractSkill?.name) {
-            skill.value = subtractSkill.value;
-          }
-        });
+    case actionTypes.REDUCE_SKILL:
+      if (action.skillName) {
         return {
           ...state,
-          skills: skills,
+          skills: state.skills.map((skill) =>
+            skill.name === action.skillName && skill.value
+              ? { ...skill, value: skill.value - 1 }
+              : skill
+          ),
         };
       }
       return state;
 
-    //reseting skills
+    // //reseting skills
     case actionTypes.RESET_SKILLS:
-      const skills = state.skills;
-      skills.map((skill) => (skill.value = 1));
       return {
         ...state,
-        skills: skills,
+        skills: initialHeroState.skills,
       };
 
     //setting ability

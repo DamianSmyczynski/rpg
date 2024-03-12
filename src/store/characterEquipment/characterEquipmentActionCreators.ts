@@ -1,15 +1,14 @@
-import { Armor } from "../../interfaces/items/Armor";
-import { Weapon } from "../../interfaces/items/Weapon";
+import { Item } from "../../interfaces/items/Item";
 import {
   CharacterEquipmentAction,
   characterEquipmentDispatchType,
 } from "../../type";
 import * as actionTypes from "./characterEquipmentActionTypes";
 
-export function setWeapon(weapon: Weapon) {
+export function setWeapon(item: Item) {
   const action: CharacterEquipmentAction = {
     type: actionTypes.SET_WEAPON,
-    weapon: weapon,
+    item: item,
   };
 
   return (dispatch: characterEquipmentDispatchType) => {
@@ -17,10 +16,10 @@ export function setWeapon(weapon: Weapon) {
   };
 }
 
-export function removeWeapon(weapon: Weapon) {
+export function removeWeapon(item: Item) {
   const action: CharacterEquipmentAction = {
     type: actionTypes.REMOVE_WEAPON,
-    weapon: weapon,
+    item: item,
   };
 
   return (dispatch: characterEquipmentDispatchType) => {
@@ -28,10 +27,10 @@ export function removeWeapon(weapon: Weapon) {
   };
 }
 
-export function setArmor(armor: Armor) {
+export function setArmor(item: Item) {
   const action: CharacterEquipmentAction = {
     type: actionTypes.SET_ARMOR,
-    armor: armor,
+    item: item,
   };
 
   return (dispatch: characterEquipmentDispatchType) => {
@@ -39,10 +38,33 @@ export function setArmor(armor: Armor) {
   };
 }
 
-export function removeArmor(armor: Armor) {
+export function removeArmor(item: Item) {
   const action: CharacterEquipmentAction = {
     type: actionTypes.REMOVE_ARMOR,
-    armor: armor,
+    item: item,
+  };
+
+  return (dispatch: characterEquipmentDispatchType) => {
+    dispatch(action);
+  };
+}
+
+export function addArmorDurability(item: Item) {
+  const action: CharacterEquipmentAction = {
+    type: actionTypes.ADD_ARMOR_DURABILITY,
+    item: item,
+  };
+
+  return (dispatch: characterEquipmentDispatchType) => {
+    dispatch(action);
+  };
+}
+
+export function reduceArmorDurability(item: Item, durability: number) {
+  const action: CharacterEquipmentAction = {
+    type: actionTypes.REDUCE_ARMOR_DURABILITY,
+    item: item,
+    durability: durability,
   };
 
   return (dispatch: characterEquipmentDispatchType) => {

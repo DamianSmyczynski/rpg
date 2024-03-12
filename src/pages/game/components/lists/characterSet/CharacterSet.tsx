@@ -11,7 +11,7 @@ import {
 } from "../../../../../store/characterEquipment/characterEquipmentActionCreators";
 import { Armor } from "../../../../../interfaces/items/Armor";
 import { Weapon } from "../../../../../interfaces/items/Weapon";
-import { addItem } from "../../../../../store/items/itemsAcitonCreators";
+import { addItem } from "../../../../../store/items/itemsActionCreators";
 import { TypeOfItem } from "../../../../../interfaces/items/TypeOfItem.enum";
 
 const mapStateToProps = (state: any) => {

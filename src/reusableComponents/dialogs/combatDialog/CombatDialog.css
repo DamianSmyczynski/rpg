@@ -1,0 +1,8 @@
+.combat-action-button {
+    width: 70%;
+}
+
+.combat-state {
+    min-height: 300px;
+    min-width: 50px;
+}
